@@ -1,43 +1,57 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, ImageBackground } from 'react-native';
 
 const { width, height } = Dimensions.get('window')
 
 export default function Ranking({ navigation }) {
     return(
-        <View style={styles.container}>
-            <View style={styles.topColumn}>
+        <ImageBackground source={require('./assets/모든배경.jpg')} style={styles.container}>
+            <View style={styles.endButtonView}>
+                <TouchableOpacity>
+                    <Image style={styles.endButton} source={require('./assets/종료버튼.png')}/>
+                </TouchableOpacity>
+            </View>
+            
+            <View style={styles.topRowView}>
                 <View style={styles.points}>
                     <Text>채집된 물고기</Text>
                     <Text>사용 가능한 물고기</Text>
                 </View>
-                <TouchableOpacity>
-                    <Image style={styles.end} source={require('./assets/square.png')}/> 
-                </TouchableOpacity>
+                <Image style={styles.fishInNet} source={require('./assets/그물안에-물고기.png')}/> 
             </View>
+            
             <View style={styles.content}>
             </View>
-            <View style={styles.bottomColumn}>
+            
+            <View style={styles.bottomRowView}>
                 <TouchableOpacity onPress={() => navigation.navigate('Labeling')}>
-                    <Image style={styles.button} source={require('./assets/square.png')}/> 
+                    <Image style={styles.button} source={require('./assets/라벨링-시작-버튼.png')}/> 
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Evaluate')}>
-                    <Image style={styles.button} source={require('./assets/square.png')}/> 
+                    <Image style={styles.button} source={require('./assets/분석시작-버튼.png')}/> 
                 </TouchableOpacity>
             </View>
-        </View>
+        </ImageBackground>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#fff',
       alignItems: 'center',
+      width: '100%',
+      height: '100%'
     },
-    topColumn: {
+    endButtonView: {
+        marginTop: 30,
+        marginLeft: width - 70,
+        alignItems: 'flex-end'
+    },
+    endButton: {
+        width: 59,
+        height: 54
+    },
+    topRowView: {
         flexDirection: 'row',
-        marginTop: 70,
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -45,29 +59,29 @@ const styles = StyleSheet.create({
         backgroundColor: '#999',
         alignItems: 'center',
         justifyContent: 'center',
-        marginRight: 40,
+        marginRight: 20,
         width: 220,
         height: 60
     },
-    end: {
-        width: 50,
-        height: 50
+    fishInNet: {
+        width: 86,
+        height: 81
     },
     content: {
         backgroundColor: '#999', 
         width: width - 50,
-        marginTop: 30,
-        height: 600
+        marginTop: 10,
+        height: 580
     },
-    bottomColumn: {
+    bottomRowView: {
         flexDirection: 'row',
-        width: width - 150,
+        width: width - 90,
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginTop: 40
+        marginTop: 10
     },
     button: {
-        width: 50,
-        height: 50
+        width: 142,
+        height: 48
     }
   });

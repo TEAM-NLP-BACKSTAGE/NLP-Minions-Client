@@ -6,7 +6,7 @@ export default function Evaluate({ navigation }) {
 
     return(
         <View style={styles.container}>
-            <View style={styles.topColumn}>
+            <View style={styles.topRowView}>
                 <TouchableOpacity onPress={() => navigation.navigate('Ranking')}>
                     <Image style={styles.backButton} source={require('./assets/square.png')}/> 
                 </TouchableOpacity>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
     },
-    topColumn: {
+    topRowView: {
         flexDirection: 'row',
         marginTop: 70,
         alignItems: 'center',

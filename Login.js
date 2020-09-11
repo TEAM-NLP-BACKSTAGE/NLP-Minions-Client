@@ -1,10 +1,39 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, StatusBar, TextInput, Dimensions, Image, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, TextInput, Dimensions, Image, TouchableOpacity, ImageBackground } from 'react-native';
+
 import Loading from './Loading';
+
+const { width, height } = Dimensions.get('window')
 
 export default function Login({ navigation }) {
   const [isLoading, setIsLoading] = useState(true)
   const [idNumber, setIdNumber] = useState('')
+  const [identified, setIdentified] = useState(true);
+
+  const loginCheck = () => {
+    fetch('http://220.90.200.172:3000/user/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: idNumber
+      }),
+    })
+    .then(response => {
+      if(response.ok) {
+        navigation.navigate('Ranking');
+        return
+      }
+      else {   
+        setIdentified(false);
+        return
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }
 
   setTimeout(() => { setIsLoading(false) }, 3000);
 
@@ -13,40 +42,56 @@ export default function Login({ navigation }) {
   }
 
   return (
-  <View style={styles.container}>
-    <StatusBar barStyle='dark-content'></StatusBar>
-    <TextInput 
-      style={styles.idInput} 
-      onChangeText={idNumber => setIdNumber(idNumber)} 
-      value={idNumber} 
-      maxLength={15}
-      placeholder='아이디를 입력해주세요' 
-    />
-    <TouchableOpacity onPress={() => navigation.navigate('Ranking')}>
-      <Image style={styles.loginButton} source={require('./assets/square.png')}/> 
-    </TouchableOpacity>
-  </View>
+    <ImageBackground source={require('./assets/모든배경.jpg')} style={styles.container}>
+      <View style={styles.idInputView}>
+        <TextInput 
+          style={styles.idInput} 
+          onChangeText={idNumber => setIdNumber(idNumber)} 
+          value={idNumber} 
+          maxLength={15}
+          placeholder='아이디를 입력해주세요 :-)' // 글씨체 변경 필요: 인터파크고딕
+          placeholderTextColor='#595757'
+        />
+        <TouchableOpacity onPress={loginCheck}>
+          <Image style={styles.loginButton} source={require('./assets/클릭-창.png')}/> 
+        </TouchableOpacity>
+      </View>
+      {identified ? 
+      <Text></Text> 
+      : 
+      <Image style={styles.loginFail} source={require('./assets/로그인-실패-창.png')}/>
+      }
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    width: '100%',
+    height: '100%',
+    alignItems: 'center'
+  },
+  idInputView: {
+    marginTop: height / 2 - 25,
+    marginBottom: 30,
     flexDirection: 'row',
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: "center",
+    alignItems: 'center'
   },
   idInput: {
-    backgroundColor: '#aaa',
-    height: 50,
+    backgroundColor: '#d8e1e3',
+    height: 48,
     width: 250,
     paddingLeft: 10,
-    marginRight: 10,
-    fontSize: 17 // ios 입력할 때 글자 크기 변하는 에러 존재
+    marginRight: 13,
+    fontSize: 17, // ios 입력할 때 글자 크기 변하는 에러 존재
+    borderRadius: 7
   },
   loginButton: {
-    width: 50,
+    width: 55,
     height: 50
+  },
+  loginFail: {
+    width: 318,
+    height: 25
   }
 });

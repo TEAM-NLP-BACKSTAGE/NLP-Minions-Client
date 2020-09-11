@@ -1,7 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
+import ResultLoading from './ResultLoading'
+
 export default function Result({ navigation }) {
+    const [isLoading, setIsLoading] = useState(true)
+
+    setTimeout(() => { setIsLoading(false) }, 5000);
+
+    if(isLoading) {
+      return <ResultLoading/>
+    }
+
     return(
         <View style={styles.container}>
             <Text style={{fontSize: 50}}>Result</Text>

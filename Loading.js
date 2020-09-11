@@ -3,8 +3,8 @@ import { StyleSheet, Image, ImageBackground } from 'react-native';
 
 export default function Loading() {
     return(
-        <ImageBackground source={require('./assets/background.jpg')} style={styles.container}>
-            <Image style={styles.logo} source={require('./assets/logo.png')}/>
+        <ImageBackground source={require('./assets/배경.jpg')} style={styles.container}>
+            <Image style={styles.logo} source={require('./assets/웨일링.png')}/>
         </ImageBackground>
     )
 }
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
       },
     logo : {
-        width: 200,
-        height: 200
+        width: 186,
+        height: 189
     }
   });
