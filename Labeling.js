@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, StatusBar } from 'react-native';
 
 export default function Labeling({ navigation }) {
     return(
         <View style={styles.container}>
+            <StatusBar barStyle='light-content'></StatusBar>
             <Text style={{fontSize: 50}}>Labeling</Text>
             <Button title='Go Back' onPress={() => navigation.goBack()}/>
         </View>

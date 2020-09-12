@@ -1,19 +1,21 @@
 import React from 'react';
-import { StyleSheet, View, Text} from 'react-native';
+import { StyleSheet, View, Text, StatusBar, ImageBackground } from 'react-native';
 
 export default function ResultLoading() {
     return(
-        <View style={styles.container}>
+        <ImageBackground source={require('./assets/모든배경.jpg')} style={styles.container}>
+            <StatusBar barStyle='light-content'></StatusBar>
             <Text style={styles.loading}>Loading</Text>
-        </View>
+        </ImageBackground>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width: '100%',
+        height: '100%'
       },
     loading : {
         fontSize: 50

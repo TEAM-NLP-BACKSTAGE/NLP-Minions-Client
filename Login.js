@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Dimensions, Image, TouchableOpacity, ImageBackground } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, TextInput, Dimensions, Image, TouchableOpacity, ImageBackground, StatusBar } from 'react-native';
 
 import Loading from './Loading';
 
@@ -43,6 +43,7 @@ export default function Login({ navigation }) {
 
   return (
     <ImageBackground source={require('./assets/모든배경.jpg')} style={styles.container}>
+      <StatusBar barStyle='light-content'></StatusBar>
       <View style={styles.idInputView}>
         <TextInput 
           style={styles.idInput} 
@@ -53,14 +54,10 @@ export default function Login({ navigation }) {
           placeholderTextColor='#595757'
         />
         <TouchableOpacity onPress={loginCheck}>
-          <Image style={styles.loginButton} source={require('./assets/클릭-창.png')}/> 
+          <Image style={styles.loginButton} source={require('./assets/login/클릭-창.png')}/> 
         </TouchableOpacity>
       </View>
-      {identified ? 
-      <Text></Text> 
-      : 
-      <Image style={styles.loginFail} source={require('./assets/로그인-실패-창.png')}/>
-      }
+        <Image style={identified ? styles.transparent : styles.loginFail} source={require('./assets/login/로그인-실패-창.png')}/>
     </ImageBackground>
   );
 }
@@ -89,6 +86,10 @@ const styles = StyleSheet.create({
   loginButton: {
     width: 55,
     height: 50
+  },
+  transparent: {
+    width: 0,
+    height: 0
   },
   loginFail: {
     width: 318,

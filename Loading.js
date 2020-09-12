@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, Image, ImageBackground } from 'react-native';
+import { StyleSheet, Image, ImageBackground, StatusBar } from 'react-native';
 
 export default function Loading() {
     return(
-        <ImageBackground source={require('./assets/배경.jpg')} style={styles.container}>
-            <Image style={styles.logo} source={require('./assets/웨일링.png')}/>
+        <ImageBackground source={require('./assets/loading/배경.jpg')} style={styles.container}>
+            <StatusBar barStyle='light-content'></StatusBar>
+            <Image style={styles.logo} source={require('./assets/loading/웨일링.png')}/>
         </ImageBackground>
     )
 }
