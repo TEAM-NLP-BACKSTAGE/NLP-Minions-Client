@@ -52,6 +52,7 @@ export default function Login({ navigation }) {
           maxLength={15}
           placeholder='아이디를 입력해주세요 :-)' // 글씨체 변경 필요: 인터파크고딕
           placeholderTextColor='#595757'
+          autoCorrect={false}
         />
         <TouchableOpacity onPress={loginCheck}>
           <Image style={styles.loginButton} source={require('./assets/login/클릭-창.png')}/> 
@@ -64,8 +65,7 @@ export default function Login({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    height: '100%',
+    flex: 1,
     alignItems: 'center'
   },
   idInputView: {
