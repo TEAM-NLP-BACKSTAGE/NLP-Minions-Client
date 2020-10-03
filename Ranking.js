@@ -1,57 +1,82 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, ImageBackground, StatusBar } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, ImageBackground, StatusBar, ActivityIndicator } from 'react-native';
 
 const { width, height } = Dimensions.get('window')
 
 export default function Ranking({ navigation }) {
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true)
+
+    const getRank = () => {
+        fetch('http://220.90.200.172:3000/home/rank', {
+            method: 'GET'
+        })
+        .then((response) => response.json())
+        .then((json) => setData(json.data))
+        .catch((error) => console.error('Error:', error))
+        .finally(() => setIsLoading(false))
+    }
+
+    useEffect(() => {
+        getRank();
+    }, [])
+
     return(
         <ImageBackground source={require('./assets/모든배경.jpg')} style={styles.container}>
             <StatusBar barStyle='light-content'></StatusBar>
-            <View style={styles.topRowView}>
-                <View style={styles.pointView}>
-                    <Image style={{width:53, height:9, marginBottom:1, marginRight:5}} source={require('./assets/points/채집된-물고기.png')}/>
-                    <ImageBackground source={require('./assets/points/회색바.png')} style={{width:265, height:17, marginBottom:4, flexDirection:"row"}}>
-                        <Image style={{width:30, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(1).png')}/>
-                        <Image style={{width:30, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(2).png')}/>
-                        <Image style={{width:30, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(3).png')}/>
+            <View style={styles.pointView}>
+                <View style={styles.points}>
+                    <Image style={styles.accumulatedPoints} source={require('./assets/points/채집된-물고기.png')}/>
+                    <ImageBackground source={require('./assets/points/회색바.png')} style={styles.pointBar}>
+                        <Image style={{width:33, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(1).png')}/>
                     </ImageBackground>
-                    <Image style={{width:69, height:10, marginBottom:1, marginRight:5}} source={require('./assets/points/사용가능한-물고기.png')}/>
-                    <ImageBackground source={require('./assets/points/회색바.png')} style={{width:265, height:17, flexDirection:"row"}}>
-                        <Image style={{width:30, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(1).png')}/>
+                    <Image style={styles.availablePoints} source={require('./assets/points/사용가능한-물고기.png')}/>
+                    <ImageBackground source={require('./assets/points/회색바.png')} style={styles.pointBar}>
+                        <Image style={{width:33, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(1).png')}/>
                     </ImageBackground>
                 </View>
                 <Image style={{width:87, height: 82}} source={require('./assets/points/그물안에-물고기.png')}/> 
             </View>
-            
-            <View style={styles.content}>
-                <View style={styles.rankOne}>
-                    <Image style={{width:378, height:416}} source={require('./assets/ranking/할아버지와-고래.png')}/>
-                    <Image style={{width:193, height:42, position:'absolute', top:365, left:160}} source={require('./assets/ranking/등수1.png')}/>
-                    <Text style={{fontSize:33, color:'#747474', position:'absolute', top:367, left: 162, backgroundColor:'#fff'}}>yunakim</Text> 
+
+            <View style={styles.rankingView}>
+                <View style={styles.rankOneView}>
+                    <Image style={styles.fishOne} source={require('./assets/ranking/할아버지와-고래.png')}/>
+                    <Image style={styles.rankOne} source={require('./assets/ranking/등수1.png')}/>
+                    {isLoading ? <ActivityIndicator/> : (
+                        <Text style={styles.rankOneUser}>{data[0].username} {data[0].stack_point}</Text>
+                    )}
+                </View>      
+                <View style={styles.rankTwoView}>
+                    <Image style={styles.fishTwo} source={require('./assets/ranking/개복치.png')}/>
+                    <Image style={styles.rankTwo} source={require('./assets/ranking/등수2.png')}/>
+                    {isLoading ? <ActivityIndicator/> : (
+                        <Text style={styles.rankTwoUser}>{data[1].username} {data[1].stack_point}</Text>
+                    )}
                 </View>
-                <View style={styles.rankTwo}>
-                    <Image style={{width:74, height:76}} source={require('./assets/ranking/개복치.png')}/>
-                    <Image style={{width:195, height:36, position:'absolute', left:128, top:20}} source={require('./assets/ranking/등수2.png')}/>
-                    <Text style={{fontSize:28, color:'#747474', position:'absolute', top:20, left:129, backgroundColor:'#fff'}}>dlwlrma</Text>
+                <View style={styles.rankThreeView}>
+                    <Image style={styles.fishThree} source={require('./assets/ranking/니모.png')}/>
+                    <Image style={styles.rankThree} source={require('./assets/ranking/등수3.png')}/>
+                    {isLoading ? <ActivityIndicator/> : (
+                        <Text style={styles.rankThreeUser}>{data[2].username} {data[2].stack_point}</Text>
+                    )}
                 </View>
-                <View style={styles.rankThree}>
-                    <Image style={{width:67, height:44}} source={require('./assets/ranking/니모.png')}/>
-                    <Image style={{width:195, height:30, position:'absolute', left:124, top:3}} source={require('./assets/ranking/등수3.png')}/>
-                    <Text style={{fontSize:25, color:'#747474', position:'absolute', left:127, top:3, backgroundColor:'#fff'}}>hyeri7777</Text>
+                <View style={styles.rankFourView}>
+                    <Image style={styles.fishFour} source={require('./assets/ranking/분홍물고기.png')}/>
+                    <Image style={styles.rankFour} source={require('./assets/ranking/등수4.png')}/>
+                    {isLoading ? <ActivityIndicator/> : (
+                        <Text style={styles.rankFourUser}>{data[3].username} {data[3].stack_point}</Text>
+                    )}
                 </View>
-                <View style={styles.rankFour}>
-                    <Image style={{width:48, height:25}} source={require('./assets/ranking/분홍물고기.png')}/>
-                    <Image style={{width:192, height:28, position:'absolute', left:116}} source={require('./assets/ranking/등수4.png')}/>
-                    <Text style={{fontSize:20, color:'#747474', left:69, top:3, backgroundColor:'#fff'}}>wooju1025</Text>
-                </View>
-                <View style={styles.rankFive}>
-                    <Image style={{width:45, height:15}} source={require('./assets/ranking/멸치.png')}/>
-                    <Image style={{width:187, height:25, position:'absolute', left:117}} source={require('./assets/ranking/등수5.png')}/>
-                    <Text style={{fontSize:17, color:'#747474', left:74, top:4, backgroundColor:'#fff'}}>iluvyup</Text>
+                <View style={styles.rankFiveView}>
+                    <Image style={styles.fishFive} source={require('./assets/ranking/멸치.png')}/>
+                    <Image style={styles.rankFive} source={require('./assets/ranking/등수5.png')}/>
+                    {isLoading ? <ActivityIndicator/> : (
+                        <Text style={styles.rankFiveUser}>{data[4].username} {data[4].stack_point}</Text>
+                    )}
                 </View>
             </View>
-            
-            <View style={styles.bottomRowView}>
+
+            <View style={styles.buttonView}>
                 <TouchableOpacity onPress={() => navigation.navigate('Labeling')}>
                     <Image style={styles.button} source={require('./assets/ranking/라벨링-시작-버튼.png')}/> 
                 </TouchableOpacity>
@@ -65,59 +90,171 @@ export default function Ranking({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
-      alignItems: 'center',
-      width: '100%',
-      height: '100%'
-    },
-    topRowView: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 60
+      flex: 1
     },
     pointView: {
+        height: '15%',
+        flexDirection: 'row',
         alignItems: 'flex-end',
-        justifyContent: 'center',
-        marginRight: 18,
-        width: width - 140,
-        height: 70
+        justifyContent: 'center'
     },
-    content: {
-        width: width - 50,
-        height: 590
+    points: {
+        alignItems: 'flex-end',
+        marginRight: width / 30
+    },
+    accumulatedPoints: {
+        width:53, 
+        height:9, 
+        marginBottom:1, 
+        marginRight:5
+    },
+    availablePoints: {
+        width:69, 
+        height:10, 
+        marginBottom:1, 
+        marginRight:5
+    },
+    pointBar: {
+        width:265, 
+        height:17, 
+        marginBottom:4, 
+        flexDirection:"row"
+    },
+    rankingView: {
+        height: '69%'
+    },
+    rankOneView: {
+        height: '65%'
+    },
+    rankTwoView: {
+        height: '15%', 
+        flexDirection: 'row', 
+        alignItems: 'center'
+    },
+    rankThreeView: {
+        height: '8%', 
+        flexDirection: 'row', 
+        alignItems: 'center'
+    },
+    rankFourView: {
+        height: '8%', 
+        flexDirection: 'row', 
+        alignItems: 'center'
+    },
+    rankFiveView: {
+        height: '4%', 
+        flexDirection: 'row', 
+        alignItems: 'center'
+    },
+    fishOne: {
+        height:'100%', 
+        width: '100%', 
+        resizeMode: 'contain'
+    },
+    fishTwo: {
+        height: '82%', 
+        resizeMode: 'contain', 
+        marginLeft: 17
+    },
+    fishThree: {
+        height: '85%', 
+        resizeMode: 'contain', 
+        marginLeft: 23
+    },
+    fishFour: {
+        height: '50%', 
+        resizeMode: 'contain', 
+        marginLeft: 45
+    },
+    fishFive: {
+        height: '60%', 
+        resizeMode: 'contain', 
+        marginLeft: 47
     },
     rankOne: {
-        flexDirection: 'row'
+        width:193, 
+        height:42, 
+        position:'absolute', 
+        bottom:'1%', 
+        left:'43%'
     },
     rankTwo: {
-        flexDirection: 'row',
-        marginLeft: 34,
-        marginTop:9
+        width:195, 
+        height:36, 
+        position:'absolute', 
+        bottom:'30%', 
+        left:'43%'
     },
     rankThree: {
-        flexDirection: 'row',
-        marginLeft: 38,
-        marginTop:9
+        width:195, 
+        height:30, 
+        position:'absolute', 
+        bottom:'40%', 
+        left:'43%'
     },
     rankFour: {
-        flexDirection: 'row',
-        marginLeft: 48,
-        marginTop:11
+        width:192, 
+        height:28, 
+        position:'absolute', 
+        bottom:'45%', 
+        left:'43%'
     },
     rankFive: {
-        flexDirection: 'row',
-        marginLeft: 48,
-        marginTop:16
+        width:187, 
+        height:25, 
+        position:'absolute', 
+        bottom:'20%', 
+        left:'43%'
     },
-    bottomRowView: {
+    rankOneUser: {
+        fontSize:30, 
+        color:'#747474', 
+        position:'absolute', 
+        bottom:'0%',
+        left:'43%', 
+        backgroundColor:'#fff'
+    },
+    rankTwoUser: {
+        fontSize:28, 
+        color:'#747474', 
+        position:'absolute', 
+        bottom:'27%', 
+        left:'43%', 
+        backgroundColor:'#fff'
+    },
+    rankThreeUser: {
+        fontSize:25, 
+        color:'#747474', 
+        position:'absolute', 
+        bottom:'35%', 
+        left:'43%', 
+        backgroundColor:'#fff'
+    },
+    rankFourUser: {
+        fontSize:22, 
+        color:'#747474', 
+        position:'absolute', 
+        bottom:'40%', 
+        left:'43%', 
+        backgroundColor:'#fff'
+    },
+    rankFiveUser: {
+        fontSize:20, 
+        color:'#747474', 
+        position:'absolute', 
+        bottom:'15%', 
+        left:'43%', 
+        backgroundColor:'#fff'
+    },
+    buttonView: {
+        height: '16%',
         flexDirection: 'row',
-        width: width - 90,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginTop: 60
+        justifyContent:'center',
+        marginTop: 17
     },
     button: {
         width: 142,
-        height: 48
+        height: 48,
+        marginHorizontal: 16
     }
   });
