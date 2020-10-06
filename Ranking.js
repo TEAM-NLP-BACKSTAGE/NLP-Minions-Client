@@ -3,9 +3,10 @@ import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, ImageBackg
 
 const { width, height } = Dimensions.get('window')
 
-export default function Ranking({ navigation }) {
+export default function Ranking({ route, navigation }) {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
+    const {userIdx} = route.params
 
     const getRank = () => {
         fetch('http://220.90.200.172:3000/home/rank', {
