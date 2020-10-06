@@ -1,24 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, ImageBackground, StatusBar, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, ImageBackground, StatusBar } from 'react-native';
 
 const { width, height } = Dimensions.get('window')
 
 export default function Ranking({ route, navigation }) {
-    const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true)
+    const [rank, setRank] = useState([])
+    const [point, setPoint] = useState([])
+    const [rankLoading, setRankLoading] = useState(true)
+    const [pointLoading, setPointLoading] = useState(true)
     const {userIdx} = route.params
+
+    const getPoint = () => {
+        fetch(`http://220.90.200.172:3000/user/point/${userIdx}`, {
+            method: 'GET'
+        })
+        .then((response) => response.json())
+        .then((json) => setPoint(json.data))
+        .catch((error) => console.error('Error:', error))
+        .finally(() => setPointLoading(false))
+    }
 
     const getRank = () => {
         fetch('http://220.90.200.172:3000/home/rank', {
             method: 'GET'
         })
         .then((response) => response.json())
-        .then((json) => setData(json.data))
+        .then((json) => setRank(json.data))
         .catch((error) => console.error('Error:', error))
-        .finally(() => setIsLoading(false))
+        .finally(() => setRankLoading(false))
     }
 
     useEffect(() => {
+        getPoint();
         getRank();
     }, [])
 
@@ -29,11 +42,29 @@ export default function Ranking({ route, navigation }) {
                 <View style={styles.points}>
                     <Image style={styles.accumulatedPoints} source={require('./assets/points/채집된-물고기.png')}/>
                     <ImageBackground source={require('./assets/points/회색바.png')} style={styles.pointBar}>
-                        <Image style={{width:33, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(1).png')}/>
+                        {!pointLoading && (point[0].point) >= 1 && <Image style={{width:33, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(1).png')}/>}
+                        {!pointLoading && (point[0].point) >= 2 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(2).png')}/>}
+                        {!pointLoading && (point[0].point) >= 3 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(3).png')}/>}
+                        {!pointLoading && (point[0].point) >= 4 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(4).png')}/>}
+                        {!pointLoading && (point[0].point) >= 5 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(5).png')}/>}
+                        {!pointLoading && (point[0].point) >= 6 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(6).png')}/>}
+                        {!pointLoading && (point[0].point) >= 7 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(7).png')}/>}
+                        {!pointLoading && (point[0].point) >= 8 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(8).png')}/>}
+                        {!pointLoading && (point[0].point) >= 8 && <Image style={{width:19, height:17}} source={require('./assets/points/파랑배경물고기_마지막-숫자표시공간.png')}/>}
+                        {!pointLoading && (point[0].point) >= 8 && <Text style={styles.pointNumber}>{point[0].point}</Text>}
                     </ImageBackground>
                     <Image style={styles.availablePoints} source={require('./assets/points/사용가능한-물고기.png')}/>
                     <ImageBackground source={require('./assets/points/회색바.png')} style={styles.pointBar}>
-                        <Image style={{width:33, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(1).png')}/>
+                        {!pointLoading && (point[0].stack_point) >= 1 && <Image style={{width:33, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(1).png')}/>}
+                        {!pointLoading && (point[0].stack_point) >= 2 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(2).png')}/>}
+                        {!pointLoading && (point[0].stack_point) >= 3 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(3).png')}/>}
+                        {!pointLoading && (point[0].stack_point) >= 4 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(4).png')}/>}
+                        {!pointLoading && (point[0].stack_point) >= 5 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(5).png')}/>}
+                        {!pointLoading && (point[0].stack_point) >= 6 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(6).png')}/>}
+                        {!pointLoading && (point[0].stack_point) >= 7 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(7).png')}/>}
+                        {!pointLoading && (point[0].stack_point) >= 8 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(8).png')}/>}
+                        {!pointLoading && (point[0].stack_point) >= 8 && <Image style={{width:19, height:17}} source={require('./assets/points/분홍배경물고기_마지막-숫자표시공간.png')}/>}
+                        {!pointLoading && (point[0].stack_point) >= 8 && <Text style={styles.pointNumber}>{point[0].stack_point}</Text>}
                     </ImageBackground>
                 </View>
                 <Image style={{width:87, height: 82}} source={require('./assets/points/그물안에-물고기.png')}/> 
@@ -43,37 +74,27 @@ export default function Ranking({ route, navigation }) {
                 <View style={styles.rankOneView}>
                     <Image style={styles.fishOne} source={require('./assets/ranking/할아버지와-고래.png')}/>
                     <Image style={styles.rankOne} source={require('./assets/ranking/등수1.png')}/>
-                    {isLoading ? <ActivityIndicator/> : (
-                        <Text style={styles.rankOneUser}>{data[0].username} {data[0].stack_point}</Text>
-                    )}
+                    {!rankLoading && <Text style={styles.rankOneUser}>{rank[0].username} {rank[0].stack_point}</Text>}
                 </View>      
                 <View style={styles.rankTwoView}>
                     <Image style={styles.fishTwo} source={require('./assets/ranking/개복치.png')}/>
                     <Image style={styles.rankTwo} source={require('./assets/ranking/등수2.png')}/>
-                    {isLoading ? <ActivityIndicator/> : (
-                        <Text style={styles.rankTwoUser}>{data[1].username} {data[1].stack_point}</Text>
-                    )}
+                    {!rankLoading && <Text style={styles.rankTwoUser}>{rank[1].username} {rank[1].stack_point}</Text>}
                 </View>
                 <View style={styles.rankThreeView}>
                     <Image style={styles.fishThree} source={require('./assets/ranking/니모.png')}/>
                     <Image style={styles.rankThree} source={require('./assets/ranking/등수3.png')}/>
-                    {isLoading ? <ActivityIndicator/> : (
-                        <Text style={styles.rankThreeUser}>{data[2].username} {data[2].stack_point}</Text>
-                    )}
+                    {!rankLoading && <Text style={styles.rankThreeUser}>{rank[2].username} {rank[2].stack_point}</Text>}
                 </View>
                 <View style={styles.rankFourView}>
                     <Image style={styles.fishFour} source={require('./assets/ranking/분홍물고기.png')}/>
                     <Image style={styles.rankFour} source={require('./assets/ranking/등수4.png')}/>
-                    {isLoading ? <ActivityIndicator/> : (
-                        <Text style={styles.rankFourUser}>{data[3].username} {data[3].stack_point}</Text>
-                    )}
+                    {!rankLoading && <Text style={styles.rankFourUser}>{rank[3].username} {rank[3].stack_point}</Text>}
                 </View>
                 <View style={styles.rankFiveView}>
                     <Image style={styles.fishFive} source={require('./assets/ranking/멸치.png')}/>
                     <Image style={styles.rankFive} source={require('./assets/ranking/등수5.png')}/>
-                    {isLoading ? <ActivityIndicator/> : (
-                        <Text style={styles.rankFiveUser}>{data[4].username} {data[4].stack_point}</Text>
-                    )}
+                    {!rankLoading && <Text style={styles.rankFiveUser}>{rank[4].username} {rank[4].stack_point}</Text>}
                 </View>
             </View>
 
@@ -120,6 +141,12 @@ const styles = StyleSheet.create({
         height:17, 
         marginBottom:4, 
         flexDirection:"row"
+    },
+    pointNumber: {
+        fontSize: 12,
+        position: 'absolute',
+        right: '0%',
+        bottom: '10%'
     },
     rankingView: {
         height: '69%'
