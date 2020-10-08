@@ -23,7 +23,7 @@ export default function Login({ navigation }) {
       })
       let json = await response.json();
       if (json.statusCode == 200) {
-        return navigation.navigate('Ranking', { userIdx: json.data.user_idx })
+        return navigation.replace('Ranking', { userIdx: json.data.user_idx })
       }
       else {
         setIdentified(false)

@@ -5,7 +5,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Login from './Login';
 import Ranking from './Ranking';
-import Labeling from './Labeling';
+import LabelCategory from './LabelCategory';
+import LabelAgeGender from './LabelAgeGender';
+import LabelRegion from './LabelRegion';
+import LabelHobby from './LabelHobby';
 import Evaluate from './Evaluate';
 import Result from './Result';
 
@@ -17,7 +20,10 @@ export default function App() {
       <Stack.Navigator headerMode={"none"}>
         <Stack.Screen name='Login' component={Login}/>
         <Stack.Screen name='Ranking' component={Ranking}/> 
-        <Stack.Screen name='Labeling' component={Labeling}/>
+        <Stack.Screen name='LabelCategory' component={LabelCategory}/>
+        <Stack.Screen name='LabelAgeGender' component={LabelAgeGender}/>
+        <Stack.Screen name='LabelRegion' component={LabelRegion}/>
+        <Stack.Screen name='LabelHobby' component={LabelHobby}/>
         <Stack.Screen name='Evaluate' component={Evaluate}/>
         <Stack.Screen name='Result' component={Result}/>
       </Stack.Navigator>

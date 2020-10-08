@@ -1,12 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, StatusBar } from 'react-native';
 
-export default function Labeling({ navigation }) {
+export default function LabelAgeGender({ navigation }) {
     return(
         <View style={styles.container}>
             <StatusBar barStyle='light-content'></StatusBar>
-            <Text style={{fontSize: 50}}>Labeling</Text>
-            <Button title='Go Back' onPress={() => navigation.goBack()}/>
+            <Text style={{fontSize: 50}}>Age/Gender</Text>
+            <Button title='Back to Ranking' onPress={() => navigation.popToTop()}/>
+            <Button title='Label more' onPress={() => navigation.navigate('LabelAgeGender')}/>
         </View>
     )
 }
