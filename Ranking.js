@@ -99,7 +99,7 @@ export default function Ranking({ route, navigation }) {
             </View>
 
             <View style={styles.buttonView}>
-                <TouchableOpacity onPress={() => navigation.navigate('LabelCategory')}>
+                <TouchableOpacity onPress={() => navigation.navigate('LabelCategory', { userIdx: userIdx })}>
                     <Image style={styles.button} source={require('./assets/ranking/라벨링-시작-버튼.png')}/> 
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Evaluate', { userIdx: userIdx })}>
