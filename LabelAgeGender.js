@@ -6,6 +6,8 @@ const { width, height } = Dimensions.get('window')
 export default function LabelAgeGender({ route, navigation }) {
     const [point, setPoint] = useState([])
     const [pointLoading, setPointLoading] = useState(true)
+    const [age, setAge] = useState('')
+    const [gender, setGender] = useState('')
     const {userIdx} = route.params
 
     const getPoint = () => {
@@ -105,33 +107,49 @@ export default function LabelAgeGender({ route, navigation }) {
 
             <View style={styles.buttonView}>
                 <View style={styles.buttons}>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>남자</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>여자</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>해당없음</Text>
-                    </TouchableOpacity>
+                    <View style={gender == '남자' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setGender('남자')} hitSlop={styles.buttonTouch}>
+                            <Text style={gender == '남자' ? styles.clickedButtonText : styles.buttonText}>남자</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={gender == '여자' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setGender('여자') } hitSlop={styles.buttonTouch}>
+                            <Text style={gender == '여자' ? styles.clickedButtonText : styles.buttonText}>여자</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={gender == '해당없음' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setGender('해당없음')} hitSlop={styles.buttonTouch}>
+                            <Text style={gender == '해당없음' ? styles.clickedButtonText : styles.buttonText}>해당없음</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <View style={styles.buttons}>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>10대</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>20대</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>30대</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>40대 이상</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>해당없음</Text>
-                    </TouchableOpacity>
+                    <View style={age == '10대' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress={() => setAge('10대')} hitSlop={styles.buttonTouch}>
+                            <Text style={age == '10대' ? styles.clickedButtonText : styles.buttonText}>10대</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={age == '20대' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress={() => setAge('20대')} hitSlop={styles.buttonTouch}>
+                            <Text style={age == '20대' ? styles.clickedButtonText : styles.buttonText}>20대</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={age == '30대' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress={() => setAge('30대')} hitSlop={styles.buttonTouch}>
+                            <Text style={age == '30대' ? styles.clickedButtonText : styles.buttonText}>30대</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={age == '40대 이상' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress={() => setAge('40대 이상')} hitSlop={styles.buttonTouch}>
+                            <Text style={age == '40대 이상' ? styles.clickedButtonText : styles.buttonText}>40대 이상</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={age == '해당없음' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress={() => setAge('해당없음')} hitSlop={styles.buttonTouch}>
+                            <Text style={age == '해당없음' ? styles.clickedButtonText : styles.buttonText}>해당없음</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <TouchableOpacity onPress={() => navigation.navigate('LabelAgeGender')}>
@@ -147,12 +165,12 @@ const styles = StyleSheet.create({
       flex: 1
     },
     backToRankingView: {
-        height:'10%',
+        height: '10%',
         justifyContent: 'flex-end'
     },
     rankButton: {
-        width:62, 
-        height:65, 
+        width: 62, 
+        height: 65, 
         top: '20%',
     },
     pointView: {
@@ -166,22 +184,22 @@ const styles = StyleSheet.create({
         marginRight: width / 30
     },
     accumulatedPoints: {
-        width:53, 
-        height:9, 
-        marginBottom:1, 
-        marginRight:5
+        width: 53, 
+        height: 9, 
+        marginBottom: 1, 
+        marginRight: 5
     },
     availablePoints: {
-        width:69, 
-        height:10, 
-        marginBottom:1, 
-        marginRight:5
+        width: 69, 
+        height: 10, 
+        marginBottom: 1, 
+        marginRight: 5
     },
     pointBar: {
-        width:265, 
-        height:17, 
-        marginBottom:4, 
-        flexDirection:"row"
+        width: 265, 
+        height: 17, 
+        marginBottom: 4, 
+        flexDirection: "row"
     },
     pointNumber: {
         fontSize: 12,
@@ -201,7 +219,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain'
     },
     idText: {
-        fontSize:20, 
+        fontSize: 20, 
         position: 'absolute', 
         top: '18%', 
         left: '44%', 
@@ -246,14 +264,38 @@ const styles = StyleSheet.create({
     buttons: {
         flexDirection: 'row', 
         height: '27%', 
-        width: '100%', 
-        backgroundColor: '#d8e2e3', 
-        justifyContent: 'space-around', 
-        alignItems: 'center', 
+        width: '100%',
+        backgroundColor: '#d8e2e3',
+        borderRadius: 7
+    },
+    button: {
+        flex: 1, 
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#d8e2e3',
+        borderRadius: 7
+    },
+    clickedButton: {
+        flex: 1, 
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#A0C0F9',
         borderRadius: 7
     },
     buttonText: {
-        fontSize:21, 
-        color: '#333333'
+        fontSize: 18, 
+        color: '#333333',
+        fontWeight: '500'
+    },
+    clickedButtonText: {
+        fontSize: 18, 
+        color: '#D04C5B',
+        fontWeight: '500'
+    },
+    buttonTouch: {
+        top: 20, 
+        bottom: 20, 
+        left: 20, 
+        right: 20
     }
   });

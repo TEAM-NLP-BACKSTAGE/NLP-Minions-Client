@@ -6,6 +6,7 @@ const { width, height } = Dimensions.get('window')
 export default function LabelRegion({ route, navigation }) {
     const [point, setPoint] = useState([])
     const [pointLoading, setPointLoading] = useState(true)
+    const [region, setRegion] = useState('')
     const {userIdx} = route.params
 
     const getPoint = () => {
@@ -105,33 +106,40 @@ export default function LabelRegion({ route, navigation }) {
 
             <View style={styles.buttonView}>
                 <View style={styles.buttons}>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>수도권</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>충청</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>강원</Text>
-                    </TouchableOpacity>
+                    <View style={region == '수도권' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setRegion('수도권')} hitSlop={styles.buttonTouch}>
+                            <Text style={region == '수도권' ? styles.clickedButtonText : styles.buttonText}>수도권</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={region == '충청' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setRegion('충청')} hitSlop={styles.buttonTouch}>
+                            <Text style={region == '충청' ? styles.clickedButtonText : styles.buttonText}>충청</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={region == '강원' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setRegion('강원')} hitSlop={styles.buttonTouch}>
+                            <Text style={region == '강원' ? styles.clickedButtonText : styles.buttonText}>강원</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <View style={styles.buttons}>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>전라</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>경상</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>30대</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>40대 이상</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>해당없음</Text>
-                    </TouchableOpacity>
+                
+                    <View style={region == '전라' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setRegion('전라')} hitSlop={styles.buttonTouch}>
+                            <Text style={region == '전라' ? styles.clickedButtonText : styles.buttonText}>전라</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={region == '경상' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setRegion('경상')} hitSlop={styles.buttonTouch}>
+                            <Text style={region == '경상' ? styles.clickedButtonText : styles.buttonText}>경상</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={region == '해당없음' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setRegion('해당없음')} hitSlop={styles.buttonTouch}>
+                            <Text style={region == '해당없음' ? styles.clickedButtonText : styles.buttonText}>해당없음</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <TouchableOpacity onPress={() => navigation.navigate('LabelRegion')}>
@@ -151,8 +159,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     rankButton: {
-        width:62, 
-        height:65, 
+        width: 62, 
+        height: 65, 
         top: '20%',
     },
     pointView: {
@@ -166,21 +174,21 @@ const styles = StyleSheet.create({
         marginRight: width / 30
     },
     accumulatedPoints: {
-        width:53, 
-        height:9, 
-        marginBottom:1, 
-        marginRight:5
+        width: 53, 
+        height: 9, 
+        marginBottom: 1, 
+        marginRight: 5
     },
     availablePoints: {
-        width:69, 
-        height:10, 
-        marginBottom:1, 
-        marginRight:5
+        width: 69, 
+        height: 10, 
+        marginBottom: 1, 
+        marginRight: 5
     },
     pointBar: {
-        width:265, 
-        height:17, 
-        marginBottom:4, 
+        width: 265, 
+        height: 17, 
+        marginBottom: 4, 
         flexDirection:"row"
     },
     pointNumber: {
@@ -201,7 +209,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain'
     },
     idText: {
-        fontSize:20, 
+        fontSize: 20, 
         position: 'absolute', 
         top: '18%', 
         left: '44%', 
@@ -246,14 +254,38 @@ const styles = StyleSheet.create({
     buttons: {
         flexDirection: 'row', 
         height: '27%', 
-        width: '100%', 
-        backgroundColor: '#d8e2e3', 
-        justifyContent: 'space-around', 
-        alignItems: 'center', 
+        width: '100%',
+        backgroundColor: '#d8e2e3',
+        borderRadius: 7
+    },
+    button: {
+        flex: 1, 
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#d8e2e3',
+        borderRadius: 7
+    },
+    clickedButton: {
+        flex: 1, 
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#A0C0F9',
         borderRadius: 7
     },
     buttonText: {
-        fontSize:21, 
-        color: '#333333'
+        fontSize: 18, 
+        color: '#333333',
+        fontWeight: '500'
+    },
+    clickedButtonText: {
+        fontSize: 18, 
+        color: '#D04C5B',
+        fontWeight: '500'
+    },
+    buttonTouch: {
+        top: 20, 
+        bottom: 20, 
+        left: 20, 
+        right: 20
     }
   });

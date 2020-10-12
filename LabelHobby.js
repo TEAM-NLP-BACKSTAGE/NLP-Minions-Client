@@ -6,6 +6,7 @@ const { width, height } = Dimensions.get('window')
 export default function LabelHobby({ route, navigation }) {
     const [point, setPoint] = useState([])
     const [pointLoading, setPointLoading] = useState(true)
+    const [hobby, setHobby] = useState('')
     const {userIdx} = route.params
 
     const getPoint = () => {
@@ -105,36 +106,54 @@ export default function LabelHobby({ route, navigation }) {
 
             <View style={styles.buttonView}>
                 <View style={styles.buttons}>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>스포츠</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>게임</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>미디어 감상</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>반려동물</Text>
-                    </TouchableOpacity>
+                    <View style={hobby == '스포츠' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setHobby('스포츠')} hitSlop={styles.buttonTouch}>
+                            <Text style={hobby == '스포츠' ? styles.clickedButtonText : styles.buttonText}>스포츠</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={hobby == '게임' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setHobby('게임')} hitSlop={styles.buttonTouch}>
+                            <Text style={hobby == '게임' ? styles.clickedButtonText : styles.buttonText}>게임</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={hobby == '미디어 감상' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setHobby('미디어 감상')} hitSlop={styles.buttonTouch}>
+                            <Text style={hobby == '미디어 감상' ? styles.clickedButtonText : styles.buttonText}>미디어 감상</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={hobby == '반려동물' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setHobby('반려동물')} hitSlop={styles.buttonTouch}>
+                            <Text style={hobby == '반려동물' ? styles.clickedButtonText : styles.buttonText}>반려동물</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <View style={styles.buttons}>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>카페</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>맛집</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>패션</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>여행</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.buttonText}>해당없음</Text>
-                    </TouchableOpacity>
+                    <View style={hobby == '카페' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setHobby('카페')} hitSlop={styles.buttonTouch}>
+                            <Text style={hobby == '카페' ? styles.clickedButtonText : styles.buttonText}>카페</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={hobby == '맛집' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setHobby('맛집')} hitSlop={styles.buttonTouch}>
+                            <Text style={hobby == '맛집' ? styles.clickedButtonText : styles.buttonText}>맛집</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={hobby == '패션' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setHobby('패션')} hitSlop={styles.buttonTouch}>
+                            <Text style={hobby == '패션' ? styles.clickedButtonText : styles.buttonText}>패션</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={hobby == '여행' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setHobby('여행')} hitSlop={styles.buttonTouch}>
+                            <Text style={hobby == '여행' ? styles.clickedButtonText : styles.buttonText}>여행</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={hobby == '해당없음' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setHobby('해당없음')} hitSlop={styles.buttonTouch}>
+                            <Text style={hobby == '해당없음' ? styles.clickedButtonText : styles.buttonText}>해당없음</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <TouchableOpacity onPress={() => navigation.navigate('LabelHobby')}>
@@ -154,8 +173,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     rankButton: {
-        width:62, 
-        height:65, 
+        width: 62, 
+        height: 65, 
         top: '20%',
     },
     pointView: {
@@ -169,22 +188,22 @@ const styles = StyleSheet.create({
         marginRight: width / 30
     },
     accumulatedPoints: {
-        width:53, 
-        height:9, 
-        marginBottom:1, 
-        marginRight:5
+        width: 53, 
+        height: 9, 
+        marginBottom: 1, 
+        marginRight: 5
     },
     availablePoints: {
-        width:69, 
-        height:10, 
-        marginBottom:1, 
-        marginRight:5
+        width: 69, 
+        height: 10, 
+        marginBottom: 1, 
+        marginRight: 5
     },
     pointBar: {
-        width:265, 
-        height:17, 
-        marginBottom:4, 
-        flexDirection:"row"
+        width: 265, 
+        height: 17, 
+        marginBottom: 4, 
+        flexDirection: "row"
     },
     pointNumber: {
         fontSize: 12,
@@ -204,7 +223,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain'
     },
     idText: {
-        fontSize:20, 
+        fontSize: 20, 
         position: 'absolute', 
         top: '18%', 
         left: '44%', 
@@ -249,14 +268,38 @@ const styles = StyleSheet.create({
     buttons: {
         flexDirection: 'row', 
         height: '27%', 
-        width: '100%', 
-        backgroundColor: '#d8e2e3', 
-        justifyContent: 'space-around', 
-        alignItems: 'center', 
+        width: '100%',
+        backgroundColor: '#d8e2e3',
+        borderRadius: 7
+    },
+    button: {
+        flex: 1, 
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#d8e2e3',
+        borderRadius: 7
+    },
+    clickedButton: {
+        flex: 1, 
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#A0C0F9',
         borderRadius: 7
     },
     buttonText: {
-        fontSize:21, 
-        color: '#333333'
+        fontSize: 18, 
+        color: '#333333',
+        fontWeight: '500'
+    },
+    clickedButtonText: {
+        fontSize: 18, 
+        color: '#D04C5B',
+        fontWeight: '500'
+    },
+    buttonTouch: {
+        top: 20, 
+        bottom: 20, 
+        left: 20, 
+        right: 20
     }
   });
