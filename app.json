@@ -21,6 +21,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "인스타그램 프로파일링을 위한 학습데이터 구축 앱"
   }
 }

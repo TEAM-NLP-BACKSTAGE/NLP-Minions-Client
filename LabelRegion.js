@@ -6,8 +6,11 @@ const { width, height } = Dimensions.get('window')
 export default function LabelRegion({ route, navigation }) {
     const [point, setPoint] = useState([])
     const [pointLoading, setPointLoading] = useState(true)
+    const [data, setData] = useState([])
+    const [dataLoading, setDataLoading] = useState(true)
     const [region, setRegion] = useState('')
     const {userIdx} = route.params
+    const {teamIdx} = route.params
 
     const getPoint = () => {
         fetch(`http://220.90.200.172:3000/user/point/${userIdx}`, {
@@ -19,8 +22,19 @@ export default function LabelRegion({ route, navigation }) {
         .finally(() => setPointLoading(false))
     }
 
+    const getData = () => {
+        fetch(`http://220.90.200.172:3000/label/user_idx/${userIdx}/team_idx/${teamIdx}`, {
+            method: 'GET'
+        })
+        .then((response) => response.json())
+        .then((json) => setData(json.data))
+        .catch((error) => console.error('Error:', error))
+        .finally(() => setDataLoading(false))
+    }
+
     useEffect(() => {
         getPoint();
+        getData();
     }, [])
 
     return(
@@ -234,7 +248,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     questionId: {
-        color: '#D04C5B', 
+        color: '#d04c5b', 
         fontSize: 13
     },
     contentText: {
@@ -255,31 +269,31 @@ const styles = StyleSheet.create({
         flexDirection: 'row', 
         height: '27%', 
         width: '100%',
-        backgroundColor: '#d8e2e3',
+        backgroundColor: '#d9e1e3',
         borderRadius: 7
     },
     button: {
         flex: 1, 
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#d8e2e3',
+        backgroundColor: '#d9e1e3',
         borderRadius: 7
     },
     clickedButton: {
         flex: 1, 
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#A0C0F9',
+        backgroundColor: '#a8cdd7',
         borderRadius: 7
     },
     buttonText: {
         fontSize: 18, 
-        color: '#333333',
+        color: '#595656',
         fontWeight: '500'
     },
     clickedButtonText: {
         fontSize: 18, 
-        color: '#D04C5B',
+        color: '#c54a57',
         fontWeight: '500'
     },
     buttonTouch: {
