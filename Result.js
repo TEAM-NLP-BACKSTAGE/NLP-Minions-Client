@@ -6,7 +6,7 @@ import ResultLoading from './ResultLoading'
 export default function Result({ navigation }) {
     const [isLoading, setIsLoading] = useState(true)
 
-    setTimeout(() => { setIsLoading(false) }, 1000);
+    setTimeout(() => { setIsLoading(false) }, 10000);
 
     if(isLoading) {
       return <ResultLoading/>
