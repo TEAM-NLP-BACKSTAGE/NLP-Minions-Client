@@ -3,8 +3,56 @@ import { StyleSheet, Text, View, StatusBar, ImageBackground, Image, TouchableOpa
 
 import ResultLoading from './ResultLoading'
 
-export default function Result({ navigation }) {
+export default function Result({ route, navigation }) {
     const [isLoading, setIsLoading] = useState(true)
+    const gender = '남자'
+    const age = '10대'
+
+    var manImages = [
+      require('./assets/resultImage/남자_10대_1.png'),
+      require('./assets/resultImage/남자_10대_2.png'),
+      require('./assets/resultImage/남자_10대_3.png'),
+      require('./assets/resultImage/남자_10대_4.png'),
+      require('./assets/resultImage/남자_10대_5.png'),
+      require('./assets/resultImage/남자_20대_1.png'),
+      require('./assets/resultImage/남자_20대_2.png'),
+      require('./assets/resultImage/남자_20대_3.png'),
+      require('./assets/resultImage/남자_20대_4.png'),
+      require('./assets/resultImage/남자_20대_5.png'),
+      require('./assets/resultImage/남자_30대_1.png'),
+      require('./assets/resultImage/남자_30대_2.png'),
+      require('./assets/resultImage/남자_30대_3.png'),
+      require('./assets/resultImage/남자_30대_4.png'),
+      require('./assets/resultImage/남자_30대_5.png'),
+      require('./assets/resultImage/남자_40대_1.png'),
+      require('./assets/resultImage/남자_40대_2.png'),
+      require('./assets/resultImage/남자_40대_3.png'),
+      require('./assets/resultImage/남자_40대_4.png'),
+      require('./assets/resultImage/남자_40대_5.png'),
+    ]
+
+    var womanImages = [
+      require('./assets/resultImage/여자_10대_1.png'),
+      require('./assets/resultImage/여자_10대_2.png'),
+      require('./assets/resultImage/여자_10대_3.png'),
+      require('./assets/resultImage/여자_10대_4.png'),
+      require('./assets/resultImage/여자_10대_5.png'),
+      require('./assets/resultImage/여자_20대_1.png'),
+      require('./assets/resultImage/여자_20대_2.png'),
+      require('./assets/resultImage/여자_20대_3.png'),
+      require('./assets/resultImage/여자_20대_4.png'),
+      require('./assets/resultImage/여자_20대_5.png'),
+      require('./assets/resultImage/여자_30대_1.png'),
+      require('./assets/resultImage/여자_30대_2.png'),
+      require('./assets/resultImage/여자_30대_3.png'),
+      require('./assets/resultImage/여자_30대_4.png'),
+      require('./assets/resultImage/여자_30대_5.png'),
+      require('./assets/resultImage/여자_40대_1.png'),
+      require('./assets/resultImage/여자_40대_2.png'),
+      require('./assets/resultImage/여자_40대_3.png'),
+      require('./assets/resultImage/여자_40대_4.png'),
+      require('./assets/resultImage/여자_40대_5.png'),
+    ]
 
     setTimeout(() => { setIsLoading(false) }, 10000);
 
@@ -17,13 +65,20 @@ export default function Result({ navigation }) {
           <StatusBar barStyle='light-content'></StatusBar>
           <View style={styles.idView}>
             <Image style={styles.fishLeft} source={require('./assets/result/보라물고기-왼쪽.png')}/>
-            <Text style={styles.idText}>@ Whaleing</Text>
+            <Text style={styles.idText}>@ Whaleling</Text>
             <Image style={styles.idIs} source={require('./assets/result/님은.png')}/>
             <Image style={styles.fishRight} source={require('./assets/result/보라물고기-오른쪽.png')}/>
           </View>
           
           <View style={styles.resultView}>
-              <Image style={styles.image} source={require('./assets/result/결과이미지.png')}/>
+              {gender == '남자' && age == '10대' && <Image style={styles.image} source={manImages[Math.floor(Math.random() * 5)]}/>}
+              {gender == '남자' && age == '20대' && <Image style={styles.image} source={manImages[5 + Math.floor(Math.random() * 5)]}/>}
+              {gender == '남자' && age == '30대' && <Image style={styles.image} source={manImages[10 + Math.floor(Math.random() * 5)]}/>}
+              {gender == '남자' && age == '40대 이상' && <Image style={styles.image} source={manImages[15 + Math.floor(Math.random() * 5)]}/>}
+              {gender == '여자' && age == '10대' && <Image style={styles.image} source={womanImages[Math.floor(Math.random() * 5)]}/>}
+              {gender == '여자' && age == '20대' && <Image style={styles.image} source={womanImages[5 + Math.floor(Math.random() * 5)]}/>}
+              {gender == '여자' && age == '30대' && <Image style={styles.image} source={womanImages[10 + Math.floor(Math.random() * 5)]}/>}
+              {gender == '여자' && age == '40대 이상' && <Image style={styles.image} source={womanImages[15 + Math.floor(Math.random() * 5)]}/>}
               <Image style={styles.ageBubble} source={require('./assets/result/수정-물방울(나이).png')}/>
               <Text style={styles.ageText}>10대</Text>
               <Image style={styles.regionBubble} source={require('./assets/result/수정물방울(지역).png')}/>
