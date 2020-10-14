@@ -32,6 +32,14 @@ export default function LabelHobby({ route, navigation }) {
         .finally(() => setDataLoading(false))
     }
 
+    const refreshData = () => {
+        setHobby('');
+        setDataLoading(true);
+        setPointLoading(true);
+        getData();
+        getPoint();
+    }
+
     useEffect(() => {
         getPoint();
         getData();
@@ -170,7 +178,7 @@ export default function LabelHobby({ route, navigation }) {
                     </View>
                 </View>
 
-                <TouchableOpacity onPress={() => navigation.navigate('LabelHobby')}>
+                <TouchableOpacity onPress={refreshData}>
                     <Image style={{width: 52, height: 49}} source={require('./assets/label/넥스트하트버튼.png')}/>
                 </TouchableOpacity>
             </View>

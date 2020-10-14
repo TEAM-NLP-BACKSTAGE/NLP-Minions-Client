@@ -33,6 +33,15 @@ export default function LabelAgeGender({ route, navigation }) {
         .finally(() => setDataLoading(false))
     }
 
+    const refreshData = () => {
+        setAge('');
+        setGender('');
+        setDataLoading(true);
+        setPointLoading(true);
+        getData();
+        getPoint();
+    }
+
     useEffect(() => {
         getPoint();
         getData();
@@ -166,7 +175,7 @@ export default function LabelAgeGender({ route, navigation }) {
                     </View>
                 </View>
 
-                <TouchableOpacity onPress={() => navigation.navigate('LabelAgeGender')}>
+                <TouchableOpacity onPress={refreshData}>
                     <Image style={{width: 52, height: 49}} source={require('./assets/label/넥스트하트버튼.png')}/>
                 </TouchableOpacity>
             </View>

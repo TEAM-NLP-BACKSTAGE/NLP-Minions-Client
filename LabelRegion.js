@@ -32,6 +32,14 @@ export default function LabelRegion({ route, navigation }) {
         .finally(() => setDataLoading(false))
     }
 
+    const refreshData = () => {
+        setRegion('');
+        setDataLoading(true);
+        setPointLoading(true);
+        getData();
+        getPoint();
+    }
+
     useEffect(() => {
         getPoint();
         getData();
@@ -156,7 +164,7 @@ export default function LabelRegion({ route, navigation }) {
                     </View>
                 </View>
 
-                <TouchableOpacity onPress={() => navigation.navigate('LabelRegion')}>
+                <TouchableOpacity onPress={refreshData}>
                     <Image style={{width: 52, height: 49}} source={require('./assets/label/넥스트하트버튼.png')}/>
                 </TouchableOpacity>
             </View>
