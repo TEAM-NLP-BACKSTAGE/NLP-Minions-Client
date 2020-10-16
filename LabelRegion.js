@@ -88,40 +88,40 @@ export default function LabelRegion({ route, navigation }) {
 
             <View style={styles.contentView}>
                 <Image style={styles.contentContainer} source={require('./assets/label/중간스퀘어.jpg')}/>
-                <Text style={styles.idText}>@dlwlrma</Text>
+                {!dataLoading && <Text style={styles.idText}>{data.insta_id}</Text>}
 
                 <ScrollView style={styles.textView}>
                     <View style={styles.questionView}>
                         <Image style={{width: 36, height: 17}} source={require('./assets/label/게시글용(보라물고기1).png')}/>
                         <View style={styles.question}>
-                            <Text style={styles.questionId}>@dlwlrma</Text>
+                            {!dataLoading && <Text style={styles.questionId}>{data.insta_id}</Text>} 
                             <Image style={{width: 135, height: 13}} source={require('./assets/label/게시글용-질문.png')}/>
                         </View>
                         <Image style={{width: 38, height: 17}} source={require('./assets/label/게시글용(보라물고기2).png')}/>
                     </View>
-                    <Text style={styles.contentText}>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</Text>
+                    {!dataLoading && <Text style={styles.contentText}>{data.content}</Text>}
                     <Image style={styles.divisionLine} source={require('./assets/label/구분선.png')}/>
 
                     <View style={styles.questionView}>
                         <Image style={{width: 36, height: 17}} source={require('./assets/label/게시글용(노랑물고기1).png')}/>
                         <View style={styles.question}>
-                            <Text style={styles.questionId}>@dlwlrma</Text>
+                            {!dataLoading && <Text style={styles.questionId}>{data.insta_id}</Text>} 
                             <Image style={{width: 147, height: 13}} source={require('./assets/label/해시태그용-질문.png')}/>
                         </View>
                         <Image style={{width: 38, height: 17}} source={require('./assets/label/해시태그용(노랑물고기2).png')}/>
                     </View>
-                    <Text style={styles.contentText}>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</Text>
+                    {!dataLoading && <Text style={styles.contentText}>{data.hashtag}</Text>}
                     <Image style={styles.divisionLine} source={require('./assets/label/구분선.png')}/>
 
                     <View style={styles.questionView}>
-                        <Image style={{width: 36, height: 17}} source={require('./assets/label/지역용(주황색물고기1).png')}/>
+                        <Image style={{width: 36, height: 15}} source={require('./assets/label/지역용(주황색물고기1).png')}/>
                         <View style={styles.question}>
-                            <Text style={styles.questionId}>@dlwlrma</Text>
+                            {!dataLoading && <Text style={styles.questionId}>{data.insta_id}</Text>} 
                             <Image style={{width: 133, height: 16}} source={require('./assets/label/지역-질문.png')}/>
                         </View>
-                        <Image style={{width: 38, height: 17}} source={require('./assets/label/지역용(주황색물고기2).png')}/>
+                        <Image style={{width: 37, height: 16}} source={require('./assets/label/지역용(주황색물고기2).png')}/>
                     </View>
-                    <Text style={styles.contentText}>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</Text>
+                    {!dataLoading && <Text style={styles.contentText}>{data.region_tag}</Text>}
                     <Image style={styles.divisionLine} source={require('./assets/label/구분선.png')}/>
                 </ScrollView>
             </View>
@@ -260,12 +260,13 @@ const styles = StyleSheet.create({
         fontSize: 13
     },
     contentText: {
-        marginHorizontal: '1%'
+        marginHorizontal: '3%'
     },
     divisionLine: {
-        width: '100%', 
+        width: '94%', 
         resizeMode: 'contain', 
-        marginTop: '3%'
+        marginTop: '3%',
+        marginHorizontal: '3%'
     },
     buttonView: {
         height: '21%', 
