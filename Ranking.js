@@ -42,29 +42,29 @@ export default function Ranking({ route, navigation }) {
                 <View style={styles.points}>
                     <Image style={styles.accumulatedPoints} source={require('./assets/points/채집된-물고기.png')}/>
                     <ImageBackground source={require('./assets/points/회색바.png')} style={styles.pointBar}>
-                        {!pointLoading && (point[0].stack_point) >= 1 && <Image style={{width:33, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(1).png')}/>}
-                        {!pointLoading && (point[0].stack_point) >= 2 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(2).png')}/>}
-                        {!pointLoading && (point[0].stack_point) >= 3 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(3).png')}/>}
-                        {!pointLoading && (point[0].stack_point) >= 4 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(4).png')}/>}
-                        {!pointLoading && (point[0].stack_point) >= 5 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(5).png')}/>}
-                        {!pointLoading && (point[0].stack_point) >= 6 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(6).png')}/>}
-                        {!pointLoading && (point[0].stack_point) >= 7 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(7).png')}/>}
-                        {!pointLoading && (point[0].stack_point) >= 8 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(8).png')}/>}
-                        {!pointLoading && (point[0].stack_point) >= 8 && <Image style={{width:19, height:17}} source={require('./assets/points/파랑배경물고기_마지막-숫자표시공간.png')}/>}
-                        {!pointLoading && (point[0].stack_point) >= 8 && <Text style={styles.pointNumber}>{point[0].stack_point}</Text>}
+                        {!pointLoading && (point.stack_point) >= 1 && <Image style={{width:33, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(1).png')}/>}
+                        {!pointLoading && (point.stack_point) >= 2 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(2).png')}/>}
+                        {!pointLoading && (point.stack_point) >= 3 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(3).png')}/>}
+                        {!pointLoading && (point.stack_point) >= 4 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(4).png')}/>}
+                        {!pointLoading && (point.stack_point) >= 5 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(5).png')}/>}
+                        {!pointLoading && (point.stack_point) >= 6 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(6).png')}/>}
+                        {!pointLoading && (point.stack_point) >= 7 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(7).png')}/>}
+                        {!pointLoading && (point.stack_point) >= 8 && <Image style={{width:31, height:17}} source={require('./assets/points/파랑배경물고기_8마리중(8).png')}/>}
+                        {!pointLoading && (point.stack_point) >= 8 && <Image style={{width:19, height:17}} source={require('./assets/points/파랑배경물고기_마지막-숫자표시공간.png')}/>}
+                        {!pointLoading && (point.stack_point )>= 8 && <Text style={styles.pointNumber}>{point.stack_point}</Text>}
                     </ImageBackground>
                     <Image style={styles.availablePoints} source={require('./assets/points/사용가능한-물고기.png')}/>
                     <ImageBackground source={require('./assets/points/회색바.png')} style={styles.pointBar}>
-                        {!pointLoading && (point[0].point) >= 1 && <Image style={{width:33, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(1).png')}/>}
-                        {!pointLoading && (point[0].point) >= 2 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(2).png')}/>}
-                        {!pointLoading && (point[0].point) >= 3 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(3).png')}/>}
-                        {!pointLoading && (point[0].point) >= 4 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(4).png')}/>}
-                        {!pointLoading && (point[0].point) >= 5 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(5).png')}/>}
-                        {!pointLoading && (point[0].point) >= 6 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(6).png')}/>}
-                        {!pointLoading && (point[0].point) >= 7 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(7).png')}/>}
-                        {!pointLoading && (point[0].point) >= 8 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(8).png')}/>}
-                        {!pointLoading && (point[0].point) >= 8 && <Image style={{width:19, height:17}} source={require('./assets/points/분홍배경물고기_마지막-숫자표시공간.png')}/>}
-                        {!pointLoading && (point[0].point) >= 8 && <Text style={styles.pointNumber}>{point[0].point}</Text>}
+                        {!pointLoading && (point.point) >= 1 && <Image style={{width:33, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(1).png')}/>}
+                        {!pointLoading && (point.point) >= 2 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(2).png')}/>}
+                        {!pointLoading && (point.point) >= 3 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(3).png')}/>}
+                        {!pointLoading && (point.point) >= 4 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(4).png')}/>}
+                        {!pointLoading && (point.point) >= 5 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(5).png')}/>}
+                        {!pointLoading && (point.point) >= 6 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(6).png')}/>}
+                        {!pointLoading && (point.point) >= 7 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(7).png')}/>}
+                        {!pointLoading && (point.point) >= 8 && <Image style={{width:31, height:17}} source={require('./assets/points/분홍배경물고기_8마리중(8).png')}/>}
+                        {!pointLoading && (point.point) >= 8 && <Image style={{width:19, height:17}} source={require('./assets/points/분홍배경물고기_마지막-숫자표시공간.png')}/>}
+                        {!pointLoading && (point.point) >= 8 && <Text style={styles.pointNumber}>{point.point}</Text>}
                     </ImageBackground>
                 </View>
                 <Image style={{width:87, height: 82}} source={require('./assets/points/그물안에-물고기.png')}/> 
