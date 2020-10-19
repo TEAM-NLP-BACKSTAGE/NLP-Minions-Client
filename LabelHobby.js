@@ -32,12 +32,28 @@ export default function LabelHobby({ route, navigation }) {
         .finally(() => setDataLoading(false))
     }
 
+    const saveHobby = () => {
+        fetch(`http://220.90.200.172:3000/label/saveLabel`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                label_idx: data.label_idx,
+                user_idx: userIdx,
+                answer: hobby
+            })
+        })
+        .catch((error) => console.error('Error:', error))
+    }
+
     const refreshData = () => {
         setHobby('');
         setDataLoading(true);
         setPointLoading(true);
         getData();
         getPoint();
+        saveHobby();
     }
 
     useEffect(() => {
@@ -171,9 +187,9 @@ export default function LabelHobby({ route, navigation }) {
                             <Text style={hobby == '여행' ? styles.clickedButtonText : styles.buttonText}>여행</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={hobby == '해당없음' ? styles.clickedButton : styles.button}>
-                        <TouchableOpacity onPress = {() => setHobby('해당없음')} hitSlop={styles.buttonTouch}>
-                            <Text style={hobby == '해당없음' ? styles.clickedButtonText : styles.buttonText}>해당없음</Text>
+                    <View style={hobby == 'no_type' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setHobby('no_type')} hitSlop={styles.buttonTouch}>
+                            <Text style={hobby == 'no_type' ? styles.clickedButtonText : styles.buttonText}>해당없음</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

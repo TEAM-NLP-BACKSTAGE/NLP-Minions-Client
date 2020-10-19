@@ -33,6 +33,36 @@ export default function LabelAgeGender({ route, navigation }) {
         .finally(() => setDataLoading(false))
     }
 
+    const saveGender = () => {
+        fetch(`http://220.90.200.172:3000/label/saveLabel`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                label_idx: data.label_idx.split(',')[0],
+                user_idx: userIdx,
+                answer: gender
+            })
+        })
+        .catch((error) => console.error('Error:', error))
+    }
+
+    const saveAge = () => {
+        fetch(`http://220.90.200.172:3000/label/saveLabel`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                label_idx: data.label_idx.split(',')[1],
+                user_idx: userIdx,
+                answer: gender
+            })
+        })
+        .catch((error) => console.error('Error:', error))
+    }
+
     const refreshData = () => {
         setAge('');
         setGender('');
@@ -40,6 +70,8 @@ export default function LabelAgeGender({ route, navigation }) {
         setPointLoading(true);
         getData();
         getPoint();
+        saveGender();
+        saveAge();
     }
 
     useEffect(() => {
@@ -140,17 +172,17 @@ export default function LabelAgeGender({ route, navigation }) {
                             <Text style={gender == '여자' ? styles.clickedButtonText : styles.buttonText}>여자</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={gender == '해당없음' ? styles.clickedButton : styles.button}>
-                        <TouchableOpacity onPress = {() => setGender('해당없음')} hitSlop={styles.buttonTouch}>
-                            <Text style={gender == '해당없음' ? styles.clickedButtonText : styles.buttonText}>해당없음</Text>
+                    <View style={gender == 'no_type' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setGender('no_type')} hitSlop={styles.buttonTouch}>
+                            <Text style={gender == 'no_type' ? styles.clickedButtonText : styles.buttonText}>해당없음</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
 
                 <View style={styles.buttons}>
-                    <View style={age == '10대' ? styles.clickedButton : styles.button}>
-                        <TouchableOpacity onPress={() => setAge('10대')} hitSlop={styles.buttonTouch}>
-                            <Text style={age == '10대' ? styles.clickedButtonText : styles.buttonText}>10대</Text>
+                    <View style={age == '미성년자' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress={() => setAge('미성년자')} hitSlop={styles.buttonTouch}>
+                            <Text style={age == '미성년자' ? styles.clickedButtonText : styles.buttonText}>10대</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={age == '20대' ? styles.clickedButton : styles.button}>
@@ -168,9 +200,9 @@ export default function LabelAgeGender({ route, navigation }) {
                             <Text style={age == '40대 이상' ? styles.clickedButtonText : styles.buttonText}>40대 이상</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={age == '해당없음' ? styles.clickedButton : styles.button}>
-                        <TouchableOpacity onPress={() => setAge('해당없음')} hitSlop={styles.buttonTouch}>
-                            <Text style={age == '해당없음' ? styles.clickedButtonText : styles.buttonText}>해당없음</Text>
+                    <View style={age == 'no_type' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress={() => setAge('no_type')} hitSlop={styles.buttonTouch}>
+                            <Text style={age == 'no_type' ? styles.clickedButtonText : styles.buttonText}>해당없음</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

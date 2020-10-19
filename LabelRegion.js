@@ -32,12 +32,28 @@ export default function LabelRegion({ route, navigation }) {
         .finally(() => setDataLoading(false))
     }
 
+    const saveRegion = () => {
+        fetch(`http://220.90.200.172:3000/label/saveLabel`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                label_idx: data.label_idx,
+                user_idx: userIdx,
+                answer: region
+            })
+        })
+        .catch((error) => console.error('Error:', error))
+    }
+
     const refreshData = () => {
         setRegion('');
         setDataLoading(true);
         setPointLoading(true);
         getData();
         getPoint();
+        saveRegion();
     }
 
     useEffect(() => {
@@ -157,9 +173,9 @@ export default function LabelRegion({ route, navigation }) {
                             <Text style={region == '경상' ? styles.clickedButtonText : styles.buttonText}>경상</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={region == '해당없음' ? styles.clickedButton : styles.button}>
-                        <TouchableOpacity onPress = {() => setRegion('해당없음')} hitSlop={styles.buttonTouch}>
-                            <Text style={region == '해당없음' ? styles.clickedButtonText : styles.buttonText}>해당없음</Text>
+                    <View style={region == 'no_type' ? styles.clickedButton : styles.button}>
+                        <TouchableOpacity onPress = {() => setRegion('no_type')} hitSlop={styles.buttonTouch}>
+                            <Text style={region == 'no_type' ? styles.clickedButtonText : styles.buttonText}>해당없음</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
