@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, ImageBackground, StatusBar } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window')
 
@@ -30,10 +31,12 @@ export default function Ranking({ route, navigation }) {
         .finally(() => setRankLoading(false))
     }
 
-    useEffect(() => {
-        getPoint();
-        getRank();
-    }, [])
+    useFocusEffect(
+        React.useCallback(() => {
+            getPoint();
+            getRank();
+        }, [])
+    )
 
     return(
         <ImageBackground source={require('./assets/모든배경.jpg')} style={styles.container}>
