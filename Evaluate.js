@@ -1,3 +1,4 @@
+import { registerRootComponent } from 'expo';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity, Image, TextInput, ImageBackground, Dimensions, StatusBar, Text } from 'react-native';
 
@@ -9,6 +10,36 @@ export default function Evaluate({ route, navigation }) {
     const [point, setPoint] = useState([])
     const [pointLoading, setPointLoading] = useState(true)
     const {userIdx} = route.params
+
+    const availableCheck = async () => {
+        try {
+          let response = await fetch('http://220.90.200.172:3000/analysis', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              insta_id: idNumber
+            }),
+          })
+          let json = await response.json();
+          if (json.statusCode == 200) {
+            return navigation.navigate('Result', { 
+                insta_id: idNumber,
+                age: json.data.age, 
+                gender: json.data.gender,
+                region: json.data.region,
+                interest: json.data.interest
+             })
+          }
+          else {
+            setAvailable(false)
+            return
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      };
 
     const getPoint = () => {
         fetch(`http://220.90.200.172:3000/user/point/${userIdx}`, {
@@ -78,7 +109,7 @@ export default function Evaluate({ route, navigation }) {
             </View>
 
             <View style={styles.buttonView}>
-                <TouchableOpacity onPress={() => navigation.navigate('Result')}>
+                <TouchableOpacity onPress={availableCheck}>
                     <Image style={styles.evaluateButton} source={require('./assets/evaluate/분석하러가기-클릭버튼.png')}/> 
                 </TouchableOpacity>
             </View>

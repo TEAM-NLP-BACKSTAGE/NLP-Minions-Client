@@ -5,8 +5,11 @@ import ResultLoading from './ResultLoading'
 
 export default function Result({ route, navigation }) {
     const [isLoading, setIsLoading] = useState(true)
-    const gender = '남자'
-    const age = '10대'
+    const {insta_id} = route.params
+    const {age} = route.params
+    const {gender} = route.params
+    const {region} = route.params
+    const {interest} = route.params
 
     var manImages = [
       require('./assets/resultImage/남자_10대_1.png'),
@@ -65,7 +68,7 @@ export default function Result({ route, navigation }) {
           <StatusBar barStyle='light-content'></StatusBar>
           <View style={styles.idView}>
             <Image style={styles.fishLeft} source={require('./assets/result/보라물고기-왼쪽.png')}/>
-            <Text style={styles.idText}>@ Whaleling</Text>
+            <Text style={styles.idText}>{insta_id}</Text>
             <Image style={styles.idIs} source={require('./assets/result/님은.png')}/>
             <Image style={styles.fishRight} source={require('./assets/result/보라물고기-오른쪽.png')}/>
           </View>
@@ -80,13 +83,13 @@ export default function Result({ route, navigation }) {
               {gender == '여자' && age == '30대' && <Image style={styles.image} source={womanImages[10 + Math.floor(Math.random() * 5)]}/>}
               {gender == '여자' && age == '40대 이상' && <Image style={styles.image} source={womanImages[15 + Math.floor(Math.random() * 5)]}/>}
               <Image style={styles.ageBubble} source={require('./assets/result/수정-물방울(나이).png')}/>
-              <Text style={styles.ageText}>10대</Text>
+              <Text style={styles.ageText}>{age}</Text>
               <Image style={styles.regionBubble} source={require('./assets/result/수정물방울(지역).png')}/>
-              <Text style={styles.regionText}>수도권</Text>
+              <Text style={styles.regionText}>{region}</Text>
               <Image style={styles.genderBubble} source={require('./assets/result/수정물방울(성별).png')}/>
-              <Text style={styles.genderText}>남자</Text>
+              <Text style={styles.genderText}>{gender}</Text>
               <Image style={styles.hobbyBubble} source={require('./assets/result/수정물방울(관심사).png')}/>
-              <Text style={styles.hobbyText}>축구</Text>
+              <Text style={styles.hobbyText}>{interest}</Text>
           </View>
           
           <View style={styles.buttonView}>
